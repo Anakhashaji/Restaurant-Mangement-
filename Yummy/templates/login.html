@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            background-image: url('static/images/bg.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+        }
+
+        .login-card {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+            margin: auto; /* Center the login card */
+        }
+
+        button {
+            padding: 10px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="login-card">
+            <h2 class="text-center">Login</h2>
+            <form id="registrationForm" method="post" action="{{ url_for('login') }}" onsubmit="return validateForm()">
+
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" class="form-control" name="username" id="username"
+                        placeholder="Enter your username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" class="form-control" name="password" id="password"
+                        placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+            <p class="mt-3 text-center">
+                Not a member? <a href="register">Sign Up</a>
+            </p>
+            <p class="mt-3 text-center">
+                Not a Restaurant ? <a href="restregister">Sign Up</a>
+            </p>
+            <p class="text-center">
+                <a href="enter_username">Forgot Password?</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function validateForm() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var errorMessageElement = document.getElementById('error-message');
+
+            // Add your validation logic here
+            if (username === '' || password === '') {
+                errorMessageElement.innerHTML = 'Please fill out all fields';
+                errorMessageElement.style.display = 'block';
+                return false;
+            }
+
+            // Assume authentication fails for this example
+            errorMessageElement.innerHTML = 'Username or password incorrect';
+            errorMessageElement.style.display = 'none'; // Hide the error message initially
+
+            // Perform asynchronous login validation using AJAX
+            // This is just a client-side check; actual validation should be done on the server
+            // Adjust the URL, method, and data as needed for your server-side validation
+            $.ajax({
+                url: "{{ url_for('login') }}", // Replace with the actual URL for your login endpoint
+                method: 'POST',
+                data: {
+                    username: username,
+                    password: password
+                },
+                success: function (response) {
+                    if (response === 'success') {
+                        // Successful login, submit the form
+                        errorMessageElement.style.display = 'none'; // Hide any existing error message
+                        document.getElementById('registrationForm').submit(); // Submit the form
+                    } else {
+                        // Failed login, display error message
+                        errorMessageElement.innerHTML = 'Username or password incorrect';
+                        errorMessageElement.style.display = 'block';
+                    }
+                },
+                error: function () {
+                    // Handle AJAX error if needed
+                    errorMessageElement.innerHTML = 'An error occurred during login';
+                    errorMessageElement.style.display = 'block';
+                }
+            });
+
+            // Prevent the form from submitting immediately (asynchronous validation)
+            return false;
+        }
+    </script>
+</body>
+
+</html>

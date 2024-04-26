@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .stars a {
+            display: inline-block;
+            padding-right: 4px;
+            text-decoration: none;
+            margin: 0;
+        }
+        
+        .stars a:after {
+            position: relative;
+            font-size: 18px;
+            font-family: 'FontAwesome', serif;
+            display: block;
+            content: "\f005";
+            color: #9e9e9e;
+        }
+        
+        span {
+            font-size: 0;
+            /* trick to remove inline-element's margin */
+        }
+        
+        .stars a:hover~a:after {
+            color: #9e9e9e !important;
+        }
+        
+        span.active a.active~a:after {
+            color: #9e9e9e;
+        }
+        
+        span:hover a:after {
+            color: blue !important;
+        }
+        
+        span.active a:after,
+        .stars a.active:after {
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <p class="stars">
+        <label class="myrating">0</label>
+        <span>
+          <a class="star-1" href="#">1</a>
+          <a class="star-2" href="#">2</a>
+          <a class="star-3" href="#">3</a>
+          <a class="star-4" href="#">4</a>
+          <a class="star-5" href="#">5</a>
+        </span>
+    </p>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        $('.stars a').on('click', function() {
+            $('.stars span, .stars a').removeClass('active');
+
+            $(this).addClass('active');
+            $('.stars span').addClass('active');
+            alert($(this).text());
+            $('.myrating').html($(this).text()); 
+        });
+    </script>
+</body>
+
+</html>

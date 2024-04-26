@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+<meta name="description" content="POS - Bootstrap Admin Template">
+<meta name="keywords" content="admin, estimates, bootstrap, business, corporate, creative, invoice, html5, responsive, Projects">
+<meta name="author" content="Dreamguys - Bootstrap Admin Template">
+<meta name="robots" content="noindex, nofollow">
+<title>Dreams Pos admin template</title>
+
+<link rel="shortcut icon" type="image/x-icon" href="static/admin/assets/img/favicon.png">
+
+<link rel="stylesheet" href="static/admin/assets/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="static/admin/assets/css/animate.css">
+
+<link rel="stylesheet" href="static/admin/assets/plugins/select2/css/select2.min.css">
+
+<link rel="stylesheet" href="static/admin/assets/css/dataTables.bootstrap4.min.css">
+
+<link rel="stylesheet" href="static/admin/assets/plugins/fontawesome/css/fontawesome.min.css">
+<link rel="stylesheet" href="static/admin/assets/plugins/fontawesome/css/all.min.css">
+
+<link rel="stylesheet" href="static/admin/assets/css/style.css">
+</head>
+<body>
+
+
+<div class="page-wrapper">
+<div class="content">
+<div class="page-header">
+<div class="page-title">
+<h4>Resturent Register</h4>
+<h6></h6>
+</div>
+</div>
+
+<div class="card">
+<div class="card-body">
+<div class="row">
+  <div class="col-lg-12" style="padding:25px;">
+    
+    <a  href="/"class="btn btn-submit me-2"  >back</a>
+  </div>
+<form  method="post" action="{{ url_for('restregister') }}" enctype='multipart/form-data' >
+
+<div class="col-12">
+  <label for="yourName" class="form-label"> </label>
+     
+  <label for="restaurant">Restaurant Type</label>
+  <select class="form-control" id="rest_type" name="rest_type"  required>
+    <option>select Type </option>
+    {% for results in datas %}
+        <option value="{{results[0]}}">  {{results[1]}} </option>
+    {% endfor %}
+  </select>
+
+  <div class="invalid-feedback">Please, enter cusine</div>
+</div>
+
+
+  <div class="col-12">
+        <label for="yourName" class="form-label"> Name</label>
+        <input type="text" name="name" class="form-control" id="yourName" required>
+        <div class="invalid-feedback">Please, enter your name!</div>
+</div>
+
+<div class="col-12">
+    <label for="yourEmail" class="form-label">Your Email</label>
+    <div class="input-group has-validation">
+        <span class="input-group-text" id="inputGroupPrepend">@</span>
+        <input type="email" name="email" class="form-control" id="yourEmail" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+        <div class="invalid-feedback">Please enter a valid Email adddress!</div>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <label for="yourUsername" class="form-label">Username</label>
+    <div class="input-group has-validation">
+      
+      <input type="text" name="username" class="form-control" id="yourUsername" required>
+      <div class="invalid-feedback">Please choose a username.</div>
+    </div>
+  </div>
+
+  <div class="col-12">
+    <label for="yourPassword" class="form-label">Password</label>
+    <!--<input type="password" name="password" class="form-control" id="yourPassword" required minlength="6">-->
+    <input type="password" name="password" class="form-control" id="yourPassword" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" title="Password must contain at least one digit, one lowercase and one uppercase letter, and be at least 6 characters long." >
+    <div class="invalid-feedback">Please enter a password with at least 6 characters</div>
+  </div>
+
+  <div class="col-12">
+    <label for="yourphoneNumber" class="form-label"> Phone Number:</label>
+    <input type="tel" name="phno" class="form-control" id="yourPhno" required required pattern="[0-9]{10}" title="Please enter a 10-digit phone number (numbers only)">
+    <div class="invalid-feedback">Please enter your 10-digit phone number!</div>
+  </div>
+
+  <div class="col-12">
+    <label for="yourstartDate" class="form-label"> Start Date</label>
+    <input type="date" name="sdate" class="form-control" id="yourstartDate" required>
+    <div class="invalid-feedback">Please, enter your StartDate!</div>
+  </div>
+  
+  <div class="col-12">
+    <label for="yourAddress" class="form-label"> address:</label>
+    <input type="text" name="address" class="form-control" id="yourAddress" required>
+    <div class="invalid-feedback">Please, enter your address!</div>
+  </div>
+
+  <!--<div class="col-12">
+    <label for="yourBio" class="form-label"> bio:</label>
+    <input type="text" name="bio" class="form-control" id="yourBio" required>
+    <div class="invalid-feedback">Please, enter your bio!</div>
+  </div>-->
+
+
+
+
+
+<div class="col-lg-12">
+<div class="form-group">
+<label> Resturent Image</label>
+<div class="image-upload">
+    <input type="file" name="photo" class="form-control" id="yourPhoto" required>
+<div class="image-uploads">
+<img src="static/admin/assets/img/icons/upload.svg" alt="img">
+<h4>Drag and drop a file to upload</h4>
+</div>
+</div>
+<div class="invalid-feedback">Please, enter your poto!</div>
+</div>
+</div>
+
+
+<div class="col-lg-12">
+<!--<a href="javascript:void(0);" class="btn btn-submit me-2">Submit</a>
+<a href="productlist.html" class="btn btn-cancel">Cancel</a>-->
+<button class="btn btn-submit me-2" type="submit">submit</button>
+</div>
+
+</div>
+</div>
+</div>
+</form>
+</div>
+</div>
+</div>
+
+
+<script src="static/admin/assets/js/jquery-3.6.0.min.js"></script>
+
+<script src="static/admin/assets/js/feather.min.js"></script>
+
+<script src="static/admin/assets/js/jquery.slimscroll.min.js"></script>
+
+<script src="static/admin/assets/js/jquery.dataTables.min.js"></script>
+<script src="static/admin/assets/js/dataTables.bootstrap4.min.js"></script>
+
+<script src="static/admin/assets/js/bootstrap.bundle.min.js"></script>
+
+<script src="static/admin/assets/plugins/select2/js/select2.min.js"></script>
+
+<script src="static/admin/assets/plugins/sweetalert/sweetalert2.all.min.js"></script>
+<script src="static/admin/assets/plugins/sweetalert/sweetalerts.min.js"></script>
+
+<script src="static/admin/assets/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+<meta name="description" content="POS - Bootstrap Admin Template">
+<meta name="keywords" content="admin, estimates, bootstrap, business, corporate, creative, invoice, html5, responsive, Projects">
+<meta name="author" content="Dreamguys - Bootstrap Admin Template">
+<meta name="robots" content="noindex, nofollow">
+<title>Dreams Pos admin template</title>
+<!-- Include jQuery library -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<link rel="shortcut icon" type="image/x-icon" href="static/admin/assets/img/favicon.png">
+
+<link rel="stylesheet" href="static/admin/assets/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="static/admin/assets/css/animate.css">
+
+<link rel="stylesheet" href="static/admin/assets/plugins/select2/css/select2.min.css">
+
+<link rel="stylesheet" href="static/admin/assets/css/dataTables.bootstrap4.min.css">
+
+<link rel="stylesheet" href="static/admin/assets/plugins/fontawesome/css/fontawesome.min.css">
+<link rel="stylesheet" href="static/admin/assets/plugins/fontawesome/css/all.min.css">
+
+<link rel="stylesheet" href="static/admin/assets/css/style.css">
+</head>
+
+
+
+<!--<script>
+    // Function to update the dish dropdown based on the selected restaurant
+    function updateDishes() {
+        var restaurantId = $('#restaurant').val();
+        console.log('restaurantId',restaurantId)
+        $.ajax({
+            type: 'POST',
+            url: '/get_dishes',  // Flask route to get dishes based on the selected restaurant
+            data: {'restaurant_id': restaurantId},
+            success: function(data) {
+                console.log(data)
+
+                // Clear and populate the dish dropdown
+                $('#dish').empty();
+                $.each(data, function(index, item) {
+                    $('#dish').append($('<option>', {
+                        value: item[0],
+                        text: item[1]
+                    }));
+                });
+            }
+        });
+    }
+
+    // Attach the function to the change event of the restaurant dropdown
+    $('#restaurant').change(function() {
+        updateDishes();
+    });
+</script>-->
+
+
+
+
+<body>
+<div id="global-loader">
+<div class="whirly-loader"> </div>
+</div>
+
+<div class="main-wrapper">
+
+<div class="header">
+
+<div class="header-left active">
+<a href="index.html" class="logo">
+<!--<img src="static/admin/assets/img/logo.png" alt="">-->
+<img src="static/admin/assets/img/rest.jpg" alt="" style="width: 100px; height: 100px;">
+
+</a>
+<!--<a href="index.html" class="logo-small">
+<img src="static/admin/assets/img/logo-small.png" alt="">
+</a>
+<a id="toggle_btn" href="javascript:void(0);">
+</a>-->
+</div>
+
+<a id="mobile_btn" class="mobile_btn" href="#sidebar">
+<span class="bar-icon">
+<span></span>
+<span></span>
+<span></span>
+</span>
+</a>
+
+<ul class="nav user-menu">
+
+<li class="nav-item">
+<div class="top-nav-search">
+<a href="javascript:void(0);" class="responsive-search">
+<i class="fa fa-search"></i>
+</a>
+<form action="#">
+<div class="searchinputs">
+<input type="text" placeholder="Search Here ...">
+<div class="search-addon">
+<span><img src="static/admin/assets/img/icons/closes.svg" alt="img"></span>
+</div>
+</div>
+<a class="btn" id="searchdiv"><img src="static/admin/assets/img/icons/search.svg" alt="img"></a>
+</form>
+</div>
+</li>
+
+
+
+{% if datau %}
+<li class="nav-item dropdown has-arrow main-drop">
+<a href="javascript:void(0);" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
+<span class="user-img"><img src="{{ url_for('static', filename='images/' + datau[0][9]) }}" alt="">
+<span class="status online"></span></span>
+</a>
+<div class="dropdown-menu menu-drop-user">
+<div class="profilename">
+<div class="profileset">
+<span class="user-img"><img src="{{ url_for('static', filename='images/' + datau[0][9]) }}" alt="">
+<span class="status online"></span></span>
+<div class="profilesets">
+<h6>{{datau[0][2]}}</h6>
+<h5>User</h5>
+</div>
+</div>
+{% endif %}
+<hr class="m-0">
+<a class="dropdown-item" href="usermyprofile"> <i class="me-2" data-feather="user"></i> My Profile</a>
+<!--<a class="dropdown-item" href="generalsettings.html"><i class="me-2" data-feather="settings"></i>Settings</a>-->
+<hr class="m-0">
+<a class="dropdown-item logout pb-0" href="logoutu"><img src="static/admin/assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
+</div>
+</div>
+</li>
+</ul>
+
+
+<div class="dropdown mobile-user-menu">
+<a href="javascript:void(0);" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+<div class="dropdown-menu dropdown-menu-right">
+<a class="dropdown-item" href="profile.html">My Profile</a>
+<a class="dropdown-item" href="generalsettings.html">Settings</a>
+<a class="dropdown-item" href="signin.html">Logout</a>
+</div>
+</div>
+
+</div>
+
+
+<div class="sidebar" id="sidebar">
+<div class="sidebar-inner slimscroll">
+<div id="sidebar-menu" class="sidebar-menu">
+<ul>
+<li>
+<a href="user_home"><img src="static/admin/assets/img/icons/dashboard.svg" alt="img"><span> Dashboard</span> </a>
+</li>
+
+<!--<li>
+  <a href="rateing"><i data-feather="file"></i><span> prediction</span> </a>
+</li>-->
+
+<li>
+<a href="showuser_review"><i data-feather="file"></i><span> display review</span> </a>
+</li>
+
+<li>
+    <a href="order_submit"><i data-feather="file"></i><span> order</span> </a>
+</li>
+<li>
+    <a href="book_table"><i data-feather="file"></i><span> book table</span> </a>
+</li>
+<li>
+    <a href="cart"><i data-feather="file"></i><span> Cart</span> </a>
+</li>
+<li>
+    <a href="his_booktable"><i data-feather="file"></i><span> History of booktable</span> </a>
+</li>
+<li>
+    <a href="his_order"><i data-feather="file"></i><span> History of order</span> </a>
+</li>
+<li>
+    <a href="submit_rating"><i data-feather="file"></i><span> add rating to dishes</span> </a>
+</li>
+<li>
+    <a href="suggetion"><i data-feather="file"></i><span> suggetions</span> </a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="page-wrapper">
+<div class="content">
+<div class="page-header">
+<div class="page-title">
+<h4>Cart</h4>
+<h6></h6>
+</div>
+</div>
+
+<div class="card">
+<div class="card-body">
+<div class="row">
+   
+
+    
+
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Order</h4>
+                    <div class="table-responsive dataview">
+                        <form class=" needs-validation" method="post" action="{{ url_for('cart') }}" enctype='multipart/form-data' novalidate>
+                        {% for order_item in datas %}
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-md-12">
+                                        
+                                        <img src="{{ url_for('static', filename='images/' + order_item[10]) }}" alt="Dish Image" class="img-fluid rounded" style="width: 150px; height: 150px;">
+
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ order_item[9] }}</h5>
+                                            <p class="card-text">Price: ${{ order_item[11] }}</p>
+                                           
+                                            
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                       <!-- <p>{{price}}</p>-->
+                        <button class=""><p id="totalPrice">Total Price: ${{ price }}</p></button>
+                    
+                    </div>
+                       <div class="col-lg-12">
+                            <!--<a href="javascript:void(0);" class="btn btn-submit me-2">Submit</a>
+                            <a href="productlist.html" class="btn btn-cancel">Cancel</a>-->
+                            <button class="btn btn-submit me-2" type="submit" id="placeOrderBtn">place order</button>
+                        </div>
+                    
+                </div>
+            </div>
+        </form>
+
+        
+
+
+
+
+
+            
+        </div>
+        </div>
+    </div>
+
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+<script>
+    $(document).ready(function () {
+        // Attach a click event handler to the "Place Order" button
+        $('#placeOrderBtn').click(function () {
+            // Redirect to the payment gateway page
+            window.location.href = '/paymentgate';
+        });
+    });
+</script>
+
+
+
+<script src="static/admin/assets/js/jquery-3.6.0.min.js"></script>
+
+<script src="static/admin/assets/js/feather.min.js"></script>
+
+<script src="static/admin/assets/js/jquery.slimscroll.min.js"></script>
+
+<script src="static/admin/assets/js/jquery.dataTables.min.js"></script>
+<script src="static/admin/assets/js/dataTables.bootstrap4.min.js"></script>
+
+<script src="static/admin/assets/js/bootstrap.bundle.min.js"></script>
+
+<script src="static/admin/assets/plugins/select2/js/select2.min.js"></script>
+
+<script src="static/admin/assets/plugins/sweetalert/sweetalert2.all.min.js"></script>
+<script src="static/admin/assets/plugins/sweetalert/sweetalerts.min.js"></script>
+
+<script src="static/admin/assets/js/script.js"></script>
+</body>
+</html>

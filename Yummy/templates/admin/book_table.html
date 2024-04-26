@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+<meta name="description" content="POS - Bootstrap Admin Template">
+<meta name="keywords" content="admin, estimates, bootstrap, business, corporate, creative, invoice, html5, responsive, Projects">
+<meta name="author" content="Dreamguys - Bootstrap Admin Template">
+<meta name="robots" content="noindex, nofollow">
+<title>Dreams Pos admin template</title>
+<!-- Include jQuery library -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<link rel="shortcut icon" type="image/x-icon" href="static/admin/assets/img/favicon.png">
+
+<link rel="stylesheet" href="static/admin/assets/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="static/admin/assets/css/animate.css">
+
+<link rel="stylesheet" href="static/admin/assets/plugins/select2/css/select2.min.css">
+
+<link rel="stylesheet" href="static/admin/assets/css/dataTables.bootstrap4.min.css">
+
+<link rel="stylesheet" href="static/admin/assets/plugins/fontawesome/css/fontawesome.min.css">
+<link rel="stylesheet" href="static/admin/assets/plugins/fontawesome/css/all.min.css">
+
+<link rel="stylesheet" href="static/admin/assets/css/style.css">
+</head>
+
+
+
+<script>
+    // Function to update the dish dropdown based on the selected restaurant
+    function updateDishes() {
+        var restaurantId = $('#restaurant').val();
+        console.log('restaurantId',restaurantId)
+        $.ajax({
+            type: 'POST',
+            url: '/get_dishes',  // Flask route to get dishes based on the selected restaurant
+            data: {'restaurant_id': restaurantId},
+            success: function(data) {
+                console.log(data)
+
+                // Clear and populate the dish dropdown
+                $('#dish').empty();
+                $.each(data, function(index, item) {
+                    $('#dish').append($('<option>', {
+                        value: item[0],
+                        text: item[1]
+                    }));
+                });
+            }
+        });
+    }
+
+    // Attach the function to the change event of the restaurant dropdown
+    $('#restaurant').change(function() {
+        updateDishes();
+    });
+</script>
+
+
+
+
+<body>
+<div id="global-loader">
+<div class="whirly-loader"> </div>
+</div>
+
+<div class="main-wrapper">
+
+<div class="header">
+
+<div class="header-left active">
+<a href="index.html" class="logo">
+<!--<img src="static/admin/assets/img/logo.png" alt="">-->
+<img src="static/admin/assets/img/rest.jpg" alt="" style="width: 100px; height: 100px;">
+
+</a>
+<!--<a href="index.html" class="logo-small">
+<img src="static/admin/assets/img/logo-small.png" alt="">
+</a>
+<a id="toggle_btn" href="javascript:void(0);">
+</a>-->
+</div>
+
+<a id="mobile_btn" class="mobile_btn" href="#sidebar">
+<span class="bar-icon">
+<span></span>
+<span></span>
+<span></span>
+</span>
+</a>
+
+<ul class="nav user-menu">
+
+<li class="nav-item">
+<div class="top-nav-search">
+<a href="javascript:void(0);" class="responsive-search">
+<i class="fa fa-search"></i>
+</a>
+<form action="#">
+<div class="searchinputs">
+<input type="text" placeholder="Search Here ...">
+<div class="search-addon">
+<span><img src="static/admin/assets/img/icons/closes.svg" alt="img"></span>
+</div>
+</div>
+<a class="btn" id="searchdiv"><img src="static/admin/assets/img/icons/search.svg" alt="img"></a>
+</form>
+</div>
+</li>
+
+
+
+{% if datau %}
+<li class="nav-item dropdown has-arrow main-drop">
+<a href="javascript:void(0);" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
+<span class="user-img"><img src="{{ url_for('static', filename='images/' + datau[0][9]) }}" alt="">
+<span class="status online"></span></span>
+</a>
+<div class="dropdown-menu menu-drop-user">
+<div class="profilename">
+<div class="profileset">
+<span class="user-img"><img src="{{ url_for('static', filename='images/' + datau[0][9]) }}" alt="">
+<span class="status online"></span></span>
+<div class="profilesets">
+<h6>{{datau[0][2]}}</h6>
+<h5>User</h5>
+</div>
+</div>
+{% endif %}
+<hr class="m-0">
+<a class="dropdown-item" href="usermyprofile"> <i class="me-2" data-feather="user"></i> My Profile</a>
+<!--<a class="dropdown-item" href="generalsettings.html"><i class="me-2" data-feather="settings"></i>Settings</a>-->
+<hr class="m-0">
+<a class="dropdown-item logout pb-0" href="logoutu"><img src="static/admin/assets/img/icons/log-out.svg" class="me-2" alt="img">Logout</a>
+</div>
+</div>
+</li>
+</ul>
+
+
+<div class="dropdown mobile-user-menu">
+<a href="javascript:void(0);" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+<div class="dropdown-menu dropdown-menu-right">
+<a class="dropdown-item" href="profile.html">My Profile</a>
+<a class="dropdown-item" href="generalsettings.html">Settings</a>
+<a class="dropdown-item" href="signin.html">Logout</a>
+</div>
+</div>
+
+</div>
+
+
+<div class="sidebar" id="sidebar">
+<div class="sidebar-inner slimscroll">
+<div id="sidebar-menu" class="sidebar-menu">
+<ul>
+<li>
+<a href="user_home"><img src="static/admin/assets/img/icons/dashboard.svg" alt="img"><span> Dashboard</span> </a>
+</li>
+
+<!--<li>
+  <a href="rateing"><i data-feather="file"></i><span> prediction</span> </a>
+</li>-->
+
+<li>
+<a href="showuser_review"><i data-feather="file"></i><span> display review</span> </a>
+</li>
+
+<li>
+    <a href="order_submit"><i data-feather="file"></i><span> order</span> </a>
+</li>
+<li>
+  <a href="book_table"><i data-feather="file"></i><span> book table</span> </a>
+</li>
+<li>
+  <a href="cart"><i data-feather="file"></i><span> Cart</span> </a>
+</li>
+<li>
+  <a href="his_booktable"><i data-feather="file"></i><span> History of booktable</span> </a>
+</li>
+<li>
+  <a href="his_order"><i data-feather="file"></i><span> History of order</span> </a>
+</li>
+<li>
+  <a href="submit_rating"><i data-feather="file"></i><span> add rating to dishes</span> </a>
+</li>
+<li>
+  <a href="suggetion"><i data-feather="file"></i><span> suggetions</span> </a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="page-wrapper">
+<div class="content">
+<div class="page-header">
+<div class="page-title">
+<h4>Book A Table</h4>
+<h6></h6>
+</div>
+</div>
+
+<div class="card">
+<div class="card-body">
+<div class="row">
+   
+
+    <!--<div class="card mb-0">
+        <div class="card-body">
+        <h4 class="card-title">Order</h4>
+        <div class="table-responsive dataview">-->
+            <!--<form class="row g-3 needs-validation" method="post" action="{{ url_for('order_submit') }}" enctype='multipart/form-data' novalidate>
+                   
+                    <div class="form-group">
+                        <label for="restaurant">Resturent</label>
+                        <select class="form-control" id="restaurant" name="restaurant"  onChange="updateDishes()" required>
+                            <option>select Resturent </option>
+                            {% for results in datas %}
+                                <option value="{{results[0]}}">  {{results[2]}} </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dish">Dish</label>
+                        <select class="form-control" id="dish" name="dish" required>
+                            <!- This will be populated dynamically based on the selected restaurant ->
+                        </select>
+                    </div>
+                
+                   
+                
+                
+                
+                
+                
+                
+                
+                <div class="col-lg-12">
+                <!-<a href="javascript:void(0);" class="btn btn-submit me-2">Submit</a>
+                <a href="productlist.html" class="btn btn-cancel">Cancel</a>->
+                <button class="btn btn-submit me-2" type="submit">order</button>
+                </div>
+           </form>-->
+
+           <section id="book-a-table" class="book-a-table">
+            <div class="container" data-aos="fade-up">
+      
+              <div class="section-header">
+                <!--<h2>Book A Table</h2>
+                <p>Book <span>Your Stay</span> With Us</p>-->
+              </div>
+      
+              <div class="row g-0">
+      
+                <!--<div class="col-lg-4 reservation-img" style="background-image: url(static/assets/img/reservation.jpg);" data-aos="zoom-out" data-aos-delay="200"></div>-->
+      
+                <div class="col-lg-8 d-flex align-items-center reservation-form-bg">
+                   {% if error %}
+                        <script>alert("{{ error }}");</script>
+                  {% endif %}
+                  {% if success %}
+                    <script>alert("{{ success }}");</script>
+                  {% endif %}
+                  <form action="{{ url_for('book_table') }}" enctype='multipart/form-data' method="post" >
+                    <div class="row gy-4">
+                      <div class="col-lg-4 col-md-6">
+                        <input type="text" name="name" class="form-control" id="name" value="{{datau[0][2]}}">
+                        <div class="validate"></div>
+                      </div>
+                      <div class="col-lg-4 col-md-6">
+                        <input type="email" class="form-control" name="email" id="email" value="{{datau[0][3]}}" >
+                        <div class="validate"></div>
+                      </div>
+                      <div class="col-lg-4 col-md-6">
+                        <input type="text" class="form-control" name="phone" id="phone" value="{{datau[0][4]}}">
+                        <div class="validate"></div>
+                      </div>
+                      <div class="col-lg-4 col-md-6">
+                        <input type="date" name="date" class="form-control" id="date" placeholder="Date"  data-msg="Please enter at least 4 chars" required>
+                        <div class="validate"></div>
+                      </div>
+                      <div class="col-lg-4 col-md-6">
+                        <input type="time" class="form-control" name="time" id="time" placeholder="Time"  data-msg="Please enter at least 4 chars" required>
+                        <div class="validate"></div>
+                      </div>
+                      <div class="col-lg-4 col-md-6">
+                        <input type="number" class="form-control" name="people" id="people" placeholder="number of people" min="1"   data-msg="Please enter at least 1 chars" reqiured>
+                        <div class="validate"></div>
+                      </div>
+                      <div class="col-lg-4 col-md-6">
+                        <select class="form-control" name="restaurant" id="restaurantId" data-rule="required" placeholder="Please select a restaurant" reqiured>
+                          <option value="">Select a Restaurant</option>
+                          {% for results in datas %}
+                                <option value="{{results[0]}}">  {{results[3]}} </option>
+                          {% endfor %}
+                         
+                          <!-- Add more options as needed -->
+                        </select>
+                        <div class="validate"></div>
+                      </div>
+                      <div class="col-lg-4 col-md-6">
+                        <select class="form-control" name="seat_number" id="seat_number" placeholder="Please select a Seat Number" reqiured>
+                            <option value="">Select a Seat Number</option>
+                            <!-- Seat numbers will be dynamically populated based on selected restaurant -->
+                        </select>
+                        <div class="validate"></div>
+                      </div>
+                      
+
+
+                    </div>
+                    <div class="form-group mt-3">
+                      <textarea class="form-control" name="message" rows="5" placeholder="Message" ></textarea>
+                      
+                    </div>
+                    <!--<div class="mb-3">
+                      <div class="loading">Loading</div>
+                      <div class="error-message"></div>
+                      <div class="sent-message">Your booking request was sent. We will call back or send an Email to confirm your reservation. Thank you!</div>
+                    </div>-->
+                    <div class="text-center"><button class="btn btn-submit me-2" type="submit">Book a Table</button></div>
+                  </form>
+                </div><!-- End Reservation Form -->
+      
+              </div>
+      
+            </div>
+          </section>
+      
+   
+
+
+
+
+
+
+
+       <!-- </div>
+        </div>
+        </div>-->
+
+
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+<script>
+  $('#restaurantId').change(function() {
+    var restaurantId = $(this).val(); // Retrieve the selected restaurant ID
+    console.log('Selected Restaurant ID:', restaurantId); // Print the restaurantId to the console
+
+    // Make an AJAX request to fetch seat data based on the selected restaurant ID
+    $.ajax({
+        type: 'GET', // HTTP method for the request
+        url: '/get_seats/' + restaurantId, // URL endpoint for fetching seat data
+        success: function(data) { // Callback function to handle successful response
+            console.log(data);
+          const seatSelect = document.getElementById('seat_number');
+            seatSelect.innerHTML = ''; // Clear previous options
+            data.forEach(seat => { // Loop through each seat in the received data
+                const option = document.createElement('option'); // Create a new option element
+                option.value = seat[0]; // Set the value attribute to the seat ID
+                option.textContent = seat[2]; // Set the visible text content to the seat's table name
+                seatSelect.appendChild(option); // Append the option to the seatSelect dropdown
+            });
+            seatSelect.disabled = false; // Enable seat selection
+        }
+    });
+});
+
+</script>
+
+<script src="static/admin/assets/js/jquery-3.6.0.min.js"></script>
+
+<script src="static/admin/assets/js/feather.min.js"></script>
+
+<script src="static/admin/assets/js/jquery.slimscroll.min.js"></script>
+
+<script src="static/admin/assets/js/jquery.dataTables.min.js"></script>
+<script src="static/admin/assets/js/dataTables.bootstrap4.min.js"></script>
+
+<script src="static/admin/assets/js/bootstrap.bundle.min.js"></script>
+
+<script src="static/admin/assets/plugins/select2/js/select2.min.js"></script>
+
+<script src="static/admin/assets/plugins/sweetalert/sweetalert2.all.min.js"></script>
+<script src="static/admin/assets/plugins/sweetalert/sweetalerts.min.js"></script>
+
+<script src="static/admin/assets/js/script.js"></script>
+<script>
+  // Get today's date in the format YYYY-MM-DD
+  var today = new Date().toISOString().split('T')[0];
+  document.getElementById('date').setAttribute('min', today);
+</script>
+</body>
+</html>
